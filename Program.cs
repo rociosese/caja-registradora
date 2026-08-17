@@ -4,6 +4,8 @@ const string nombreComercio = "KIOSCO EL RECREO";
 
 const decimal DESCUENTO_MAYOR = 0.10m;
 const decimal DESCUENTO_MENOR = 0.05m;
+const decimal DESCUENTO_EFECTIVO = 0.10m;
+const decimal RECARGO_CREDITO = 0.15m;
 
 Console.WriteLine($"=== {nombreComercio} ===");
 
@@ -68,9 +70,48 @@ else
 
 decimal totalFinal = total - descuento;
 
+int medioPago;
+decimal recargo = 0;
+decimal descuentoEfectivo = 0;
+
+do
+{
+    Console.WriteLine("Medio de pago:");
+    Console.WriteLine("1. Efectivo");
+    Console.WriteLine("2. Débito");
+    Console.WriteLine("3. Crédito");
+    Console.Write("Opción: ");
+
+    medioPago = int.Parse(Console.ReadLine());
+
+    if (medioPago < 1 || medioPago > 3)
+    {
+        Console.WriteLine("Opción invalida. Intente nuevamente.");
+    }
+}
+while (medioPago < 1 || medioPago > 3);
+
+switch (medioPago)
+{
+    case 1:
+        descuentoEfectivo = totalFinal * DESCUENTO_EFECTIVO;
+        totalFinal -= descuentoEfectivo;
+        Console.WriteLine($"Se aplicó un descuento del 10% por pago en efectivo: ${descuentoEfectivo}");
+        break;
+    case 2:
+        Console.WriteLine("No se aplicó recargo ni descuento por pago con débito.");
+        break;
+    case 3:
+        recargo = totalFinal * RECARGO_CREDITO;
+        totalFinal += recargo;
+        Console.WriteLine($"Se aplicó un recargo del 15% por pago con crédito: ${recargo}");
+        break;
+}
+
 Console.WriteLine($"Subtotal: ${total}");
 Console.WriteLine($"Descuento: ${descuento}");
 Console.WriteLine($"Total final: ${totalFinal}");
 
 Console.ReadLine();
+
 
