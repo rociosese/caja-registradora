@@ -2,6 +2,9 @@
 
 const string nombreComercio = "KIOSCO EL RECREO";
 
+const decimal DESCUENTO_MAYOR = 0.10m;
+const decimal DESCUENTO_MENOR = 0.05m;
+
 Console.WriteLine($"=== {nombreComercio} ===");
 
 decimal total = 0;
@@ -46,6 +49,28 @@ switch (opcion)
 }
 while (opcion != 2);
 
+decimal descuento = 0;
+if (total > 50000)
+{
+    descuento = total * DESCUENTO_MAYOR;
+    Console.WriteLine($"Se aplicó un descuento del 10%: ${descuento}");
+
+}
+else if (total > 20000 && total <= 50000)
+{
+    descuento = total * DESCUENTO_MENOR;
+    Console.WriteLine($"Se aplicó un descuento del 5%: ${descuento}");
+}
+else
+{
+    Console.WriteLine("No se aplicó descuento.");
+}
+
+decimal totalFinal = total - descuento;
+
+Console.WriteLine($"Subtotal: ${total}");
+Console.WriteLine($"Descuento: ${descuento}");
+Console.WriteLine($"Total final: ${totalFinal}");
 
 Console.ReadLine();
 
