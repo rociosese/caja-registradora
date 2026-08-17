@@ -73,6 +73,7 @@ decimal totalFinal = total - descuento;
 int medioPago;
 decimal recargo = 0;
 decimal descuentoEfectivo = 0;
+string nombreMedioPago = "";
 
 do
 {
@@ -94,24 +95,43 @@ while (medioPago < 1 || medioPago > 3);
 switch (medioPago)
 {
     case 1:
+        nombreMedioPago = "Efectivo";
         descuentoEfectivo = totalFinal * DESCUENTO_EFECTIVO;
         totalFinal -= descuentoEfectivo;
         Console.WriteLine($"Se aplicó un descuento del 10% por pago en efectivo: ${descuentoEfectivo}");
         break;
     case 2:
+        nombreMedioPago = "Débito";
         Console.WriteLine("No se aplicó recargo ni descuento por pago con débito.");
         break;
     case 3:
+        nombreMedioPago = "Crédito";
         recargo = totalFinal * RECARGO_CREDITO;
         totalFinal += recargo;
         Console.WriteLine($"Se aplicó un recargo del 15% por pago con crédito: ${recargo}");
         break;
 }
 
+for (int i = 0; i < 30; i++)
+{
+    Console.Write("-");
+}
+
+Console.WriteLine();
+Console.WriteLine($"=== {nombreComercio} ===");
+Console.WriteLine($"Cajero: {nombreCajero}");
+Console.WriteLine($"Cantidad de productos: {cantidadProductos}");
 Console.WriteLine($"Subtotal: ${total}");
 Console.WriteLine($"Descuento: ${descuento}");
-Console.WriteLine($"Total final: ${totalFinal}");
+Console.WriteLine($"Recargo: ${recargo}");
+Console.WriteLine($"Medio de pago: {nombreMedioPago}");
+Console.WriteLine($"TOTAL: ${totalFinal}");
 
+for (int i = 0; i < 30; i++)
+{
+    Console.Write("-");
+}
+Console.WriteLine();
 Console.ReadLine();
 
 
